@@ -22,6 +22,7 @@ module.exports.hello = async (event) => {
 
 module.exports.createUser = async (event) => {
   console.log("Create user");
+  console.log(event);
   console.log(event.body);
 
   bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -41,7 +42,7 @@ module.exports.createUser = async (event) => {
         })
         .catch((err) => {
           return {
-            statusCode: 200,
+            statusCode: 400,
             body: JSON.stringify(err),
           };
         });
