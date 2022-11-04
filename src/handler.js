@@ -34,16 +34,28 @@ module.exports.createUser = async (event) => {
       user
         .save()
         .then((user) => {
-          callback(null, user);
           return {
             statusCode: 200,
-            body: JSON.stringify(user),
+            body: JSON.stringify(
+              {
+                message: user,
+              },
+              null,
+              2
+            ),
           };
         })
         .catch((err) => {
           return {
             statusCode: 400,
-            body: JSON.stringify(err),
+            body: JSON.stringify(
+              {
+                message: "User cannot created!",
+                error: err,
+              },
+              null,
+              2
+            ),
           };
         });
     });
