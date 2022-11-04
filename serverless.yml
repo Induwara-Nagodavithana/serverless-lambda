@@ -7,7 +7,7 @@ provider:
   region: us-east-1
 
 
-# you can define service wide environment variables here
+# you can define service wide environment variables
 #  environment:
 #    variable1: value1
 
