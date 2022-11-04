@@ -26,14 +26,7 @@ module.exports.createUser = async (event) => {
   console.log(event);
   console.log(event.password);
 
-  bcrypt.genSalt(saltRounds, function (err, salt) {
-    bcrypt.hash(event.password, salt, function (err, hash) {
-      event.password = hash;
-      const user = new User(event);
-      console.log(event);
-      // const a1 = await user.save();
-      // res.json(a1);
-      user
+  user
         .save()
         .then((user) => {
           return {
@@ -60,6 +53,41 @@ module.exports.createUser = async (event) => {
             ),
           };
         });
-    });
-  });
+
+  // bcrypt.genSalt(saltRounds, function (err, salt) {
+  //   bcrypt.hash(event.password, salt, function (err, hash) {
+  //     event.password = hash;
+  //     const user = new User(event);
+  //     console.log(event);
+  //     // const a1 = await user.save();
+  //     // res.json(a1);
+  //     user
+  //       .save()
+  //       .then((user) => {
+  //         return {
+  //           statusCode: 200,
+  //           body: JSON.stringify(
+  //             {
+  //               message: user,
+  //             },
+  //             null,
+  //             2
+  //           ),
+  //         };
+  //       })
+  //       .catch((err) => {
+  //         return {
+  //           statusCode: 400,
+  //           body: JSON.stringify(
+  //             {
+  //               message: "User cannot created!",
+  //               error: err,
+  //             },
+  //             null,
+  //             2
+  //           ),
+  //         };
+  //       });
+  //   });
+  // });
 };
