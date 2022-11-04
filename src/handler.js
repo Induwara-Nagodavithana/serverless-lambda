@@ -23,11 +23,11 @@ module.exports.hello = async (event) => {
 module.exports.createUser = async (event) => {
   console.log("Create user");
   bcrypt.genSalt(saltRounds, function (err, salt) {
-    bcrypt.hash(newUser.password, salt, function (err, hash) {
-      newUser.password = hash;
-      const user = new User(newUser);
+    bcrypt.hash(event.body.password, salt, function (err, hash) {
+      event.body.password = hash;
+      const user = new User(event.body);
       // const a1 = await user.save();
-      console.log(newUser);
+      console.log(event.body);
       // res.json(a1);
       user
         .save()

@@ -59,7 +59,7 @@ functions:
 #          conditions:
 #            host: example.com
 #            path: /hello
-createUser:
+  createUser:
     handler: src/handler.createUser
     timeout: 60
     memorySize: 128
