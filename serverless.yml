@@ -59,6 +59,14 @@ functions:
 #          conditions:
 #            host: example.com
 #            path: /hello
+createUser:
+    handler: src/handler.createUser
+    timeout: 60
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /users
+          method: post
 
 #    Define function environment variables here
 #    environment:
