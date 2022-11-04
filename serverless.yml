@@ -22,7 +22,7 @@ provider:
 functions:
   hello:
     handler: src/handler.hello
-    timeout: 60
+    timeout: 30
     memorySize: 128
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -61,7 +61,7 @@ functions:
 #            path: /hello
   createUser:
     handler: src/handler.createUser
-    timeout: 60
+    timeout: 30
     memorySize: 128
     events:
       - httpApi:
