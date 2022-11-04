@@ -1,7 +1,7 @@
 "use strict";
 const bcrypt = require("bcryptjs");
 const saltRounds = 5;
-var User = require("../models/user");
+var User = require("./models/user");
 
 module.exports.hello = async (event) => {
   return {
