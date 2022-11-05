@@ -66,74 +66,84 @@ module.exports.createUser = async (event) => {
   // };
   // await Promise.all(promises);
 
-
- await user
-    .save()
-    .then((user) => {
-      console.log(user);
-      console.log("Done user");
-      return {
-        statusCode: 200,
-        body: JSON.stringify(
-          {
-            message: user,
-          },
-          null,
-          2
-        ),
-      };
-    })
-    .catch((err) => {
-      console.log(err);
-      console.log("Error user");
-      return {
-        statusCode: 400,
-        body: JSON.stringify(
-          {
-            message: "User cannot created!",
-            error: err,
-          },
-          null,
-          2
-        ),
-      };
+  //  await user
+  //     .save()
+  //     .then((user) => {
+  //       console.log(user);
+  //       console.log("Done user");
+  //       return {
+  //         statusCode: 200,
+  //         body: JSON.stringify(
+  //           {
+  //             message: user,
+  //           },
+  //           null,
+  //           2
+  //         ),
+  //       };
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       console.log("Error user");
+  //       return {
+  //         statusCode: 400,
+  //         body: JSON.stringify(
+  //           {
+  //             message: "User cannot created!",
+  //             error: err,
+  //           },
+  //           null,
+  //           2
+  //         ),
+  //       };
+  //     });
+  // console.log(err);
+  bcrypt.genSalt(saltRounds, function (err, salt) {
+    bcrypt.hash(event.password, salt, async function (err, hash) {
+      event.password = hash;
+      const user = new User(event);
+      console.log(event);
+      // const a1 = await user.save();
+      // res.json(a1);
+      await user
+        .save()
+        .then((user) => {
+          return {
+            statusCode: 200,
+            body: JSON.stringify(
+              {
+                message: user,
+              },
+              null,
+              2
+            ),
+          };
+        })
+        .catch((err) => {
+          return {
+            statusCode: 400,
+            body: JSON.stringify(
+              {
+                message: "User cannot created!",
+                error: err,
+              },
+              null,
+              2
+            ),
+          };
+        });
     });
-    // console.log(err);
-    console.log("All Done user");
-  // bcrypt.genSalt(saltRounds, function (err, salt) {
-  //   bcrypt.hash(event.password, salt, function (err, hash) {
-  //     event.password = hash;
-  //     const user = new User(event);
-  //     console.log(event);
-  //     // const a1 = await user.save();
-  //     // res.json(a1);
-  //     user
-  //       .save()
-  //       .then((user) => {
-  //         return {
-  //           statusCode: 200,
-  //           body: JSON.stringify(
-  //             {
-  //               message: user,
-  //             },
-  //             null,
-  //             2
-  //           ),
-  //         };
-  //       })
-  //       .catch((err) => {
-  //         return {
-  //           statusCode: 400,
-  //           body: JSON.stringify(
-  //             {
-  //               message: "User cannot created!",
-  //               error: err,
-  //             },
-  //             null,
-  //             2
-  //           ),
-  //         };
-  //       });
-  //   });
-  // });
+  });
+  console.log("All Done user");
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(
+      {
+        message: "User cannot created!",
+      },
+      null,
+      2
+    ),
+  };
 };
