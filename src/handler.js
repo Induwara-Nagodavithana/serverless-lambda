@@ -27,6 +27,9 @@ module.exports.createUser = async (event) => {
   console.log(event.password);
 
   const user = new User(event);
+  console.log(user);
+  console.log("sadfasdf user");
+
   user
         .save()
         .then((user) => {
