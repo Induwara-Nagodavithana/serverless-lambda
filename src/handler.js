@@ -30,7 +30,7 @@ module.exports.createUser = async (event) => {
   console.log(user);
   console.log("sadfasdf user");
 
-  user
+ await user
     .save()
     .then((user) => {
       console.log(user);
