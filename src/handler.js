@@ -2,7 +2,7 @@
 const bcrypt = require("bcryptjs");
 const saltRounds = 5;
 var User = require("./models/user");
-var connectDB = require("./config/database");
+var connectDB = require("./config/db");
 module.exports.hello = async (event) => {
   return {
     statusCode: 200,
