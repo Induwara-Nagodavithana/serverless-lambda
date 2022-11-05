@@ -147,7 +147,7 @@ module.exports.createUser = async (event) => {
   //   });
   // });
 
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  const hashedPassword = await bcrypt.hash(event.password, saltRounds);
   event.password = hashedPassword;
   const user = new User(event);
   console.log(user);
