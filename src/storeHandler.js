@@ -235,9 +235,11 @@ module.exports.findStoreById = async (event) => {
     contactNo: "01234536789",
   });
 
-  const store = await Store.findById(event.pathParameters.storeId).populate(
-    "owner"
-  );
+  const store = await Store.findById(event.pathParameters.storeId);
+
+  if (store.name != undefined && store.populated("owner")) {
+    store.populate("owner");
+  }
 
   console.log("store.populated('owner')");
   console.log(store.populated("owner"));
