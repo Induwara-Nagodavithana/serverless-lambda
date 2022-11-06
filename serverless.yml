@@ -209,6 +209,56 @@ functions:
           path: /deals/getDealsByStore/{storeId}
           method: get
 
+# Subscription Functions
+  createSubscription:
+    handler: src/subscriptionHandler.createSubscription
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /subscriptions
+          method: post
+  updateSubscription:
+    handler: src/subscriptionHandler.updateSubscription
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /subscriptions/{subscriptionId}
+          method: put
+  deleteSubscription:
+    handler: src/subscriptionHandler.deleteSubscription
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /subscriptions/{subscriptionId}
+          method: delete
+  findAllSubscription:
+    handler: src/subscriptionHandler.findAllSubscription
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /subscriptions
+          method: get
+  findSubscriptionById:
+    handler: src/subscriptionHandler.findSubscriptionById
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /subscriptions/{subscriptionId}
+          method: get
+  findSubscriptionByUser:
+    handler: src/subscriptionHandler.findSubscriptionByUser
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /subscriptions/getSubscriptionsByUser/{userId}
+          method: get
+
 
 #    Define function environment variables here
 #    environment:
