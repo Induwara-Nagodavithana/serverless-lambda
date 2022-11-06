@@ -37,6 +37,8 @@ async function hashPassword(string) {
 module.exports.createUser = async (event) => {
   console.log("Create user");
   console.log(event.body.password);
+  console.log(event.body);
+  console.log(JSON.parse(event.body));
   console.log(event);
   await connectDB();
 
