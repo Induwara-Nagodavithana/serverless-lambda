@@ -307,52 +307,38 @@ module.exports.verifyUser = async (event) => {
       2
     ),
   };
+  const user = await User.findOne({
+    email: event.body.email,
+  });
 
-  await User.findOne({
-    "email": event.body.email,
-  })
-    .then(async (user) => {
-      console.log("user");
-      console.log(user);
+  console.log("user");
+  console.log(user);
 
-      const result = await bcrypt.compare(password, event.body.password);
-      if (result) {
-        body = {
-          statusCode: 200,
-          body: JSON.stringify(
-            {
-              message: user,
-            },
-            null,
-            2
-          ),
-        };
-      } else {
-        body = {
-          statusCode: 400,
-          body: JSON.stringify(
-            {
-              message: "User Credentials Failed!",
-            },
-            null,
-            2
-          ),
-        };
-      }
-    })
-    .catch((err) => {
-      body = {
-        statusCode: 400,
-        body: JSON.stringify(
-          {
-            message: "User cannot find!",
-            error: err,
-          },
-          null,
-          2
-        ),
-      };
-    });
+  const result = user && await bcrypt.compare(password, event.body.password);
+  if (result) {
+    body = {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          message: user,
+        },
+        null,
+        2
+      ),
+    };
+  } else {
+    body = {
+      statusCode: 400,
+      body: JSON.stringify(
+        {
+          message: "User Credentials Failed!",
+        },
+        null,
+        2
+      ),
+    };
+  }
+
   console.log("All Done user");
 
   return body;
