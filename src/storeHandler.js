@@ -237,22 +237,22 @@ module.exports.findStoreById = async (event) => {
 
   const store = await Store.findById(event.pathParameters.storeId);
 
-  if (store.name != undefined && store.populated("owner")) {
+  if (store.name != undefined) {
     store.populate("owner");
+    console.log("store.populated('owner')");
+    console.log(store.populated("owner"));
+    body = {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          message: store,
+        },
+        null,
+        2
+      ),
+    };
   }
 
-  console.log("store.populated('owner')");
-  console.log(store.populated("owner"));
-  body = {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: store,
-      },
-      null,
-      2
-    ),
-  };
   console.log("All Done store");
 
   return body;
