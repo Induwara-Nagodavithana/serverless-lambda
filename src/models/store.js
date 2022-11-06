@@ -17,6 +17,9 @@ const store = new mongoose.Schema({
   imageUrl: {
     type: String,
   },
+  catergory: {
+    type: String,
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
