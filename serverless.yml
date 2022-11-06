@@ -74,7 +74,15 @@ functions:
     events:
       - httpApi:
           path: /users/{userId}
-          method: post
+          method: put
+  deleteUser:
+    handler: src/handler.deleteUser
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /users/{userId}
+          method: delete
 
 #    Define function environment variables here
 #    environment:

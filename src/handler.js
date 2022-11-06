@@ -118,9 +118,6 @@ module.exports.updateUser = async (event) => {
     event.body.password = hashedPassword;
   }
 
-  // const user = new User(event.body);
-  // console.log(user);
-  // console.log("sadfasdf user");
 
   await User.findOneAndUpdate({ _id: event.pathParameters.userId }, event.body)
     .then((user) => {
@@ -141,6 +138,55 @@ module.exports.updateUser = async (event) => {
         body: JSON.stringify(
           {
             message: "User cannot updated!",
+            error: err,
+          },
+          null,
+          2
+        ),
+      };
+    });
+  console.log("All Done user");
+
+  return body;
+};
+
+
+
+module.exports.deleteUser = async (event) => {
+  console.log("Delete user");
+  console.log(event);
+  await connectDB();
+
+  let body = {
+    statusCode: 400,
+    body: JSON.stringify(
+      {
+        message: "User cannot deleted!",
+      },
+      null,
+      2
+    ),
+  };
+
+  await User.findByIdAndRemove(event.pathParameters.userId)
+    .then((user) => {
+      body = {
+        statusCode: 200,
+        body: JSON.stringify(
+          {
+            message: user,
+          },
+          null,
+          2
+        ),
+      };
+    })
+    .catch((err) => {
+      body = {
+        statusCode: 400,
+        body: JSON.stringify(
+          {
+            message: "User cannot deleted!",
             error: err,
           },
           null,
