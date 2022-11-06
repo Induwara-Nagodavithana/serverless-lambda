@@ -216,14 +216,14 @@ module.exports.findStoreById = async (event) => {
     statusCode: 400,
     body: JSON.stringify(
       {
-        message: "Store cannot find!",
+        message: "Error in Request!",
       },
       null,
       2
     ),
   };
 
-  await Store.findById(event.pathParameters.storeId).populate('owner')
+  await Store.findById(event.pathParameters.storeId)
     .then((store) => {
       body = {
         statusCode: 200,
