@@ -150,6 +150,14 @@ functions:
       - httpApi:
           path: /stores/{storeId}
           method: get
+  findStoreByName:
+    handler: src/storeHandler.findStoreByName
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /stores/{name}
+          method: get
 
 
 #    Define function environment variables here

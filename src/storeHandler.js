@@ -269,3 +269,64 @@ module.exports.findStoreById = async (event) => {
 
   return body;
 };
+
+module.exports.findStoreByName = async (event) => {
+  console.log("Find One store");
+  console.log(event);
+  await connectDB();
+
+  let body = {
+    statusCode: 400,
+    body: JSON.stringify(
+      {
+        message: "Error in Request!",
+      },
+      null,
+      2
+    ),
+  };
+  const user123 = new User({
+    first_name: "Saman",
+    last_name: "Silva",
+    gender: "Male",
+    password: "1234",
+    type: "ShopOwner",
+    address: "dfdfg,dfgdf,gdfgdf,gdfg",
+    email: "Nimal11@gmail.com",
+    contactNo: "01234536789",
+  });
+  try {
+    const store = await Store.findOne({
+      name: event.pathParameters.name,
+    }).populate("owner");
+
+    console.log("store.populated('owner')");
+    console.log(store.populated("owner"));
+    body = {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          message: store,
+        },
+        null,
+        2
+      ),
+    };
+  } catch (error) {
+    body = {
+      statusCode: 400,
+      body: JSON.stringify(
+        {
+          message: "Store cannot find!",
+          error: err,
+        },
+        null,
+        2
+      ),
+    };
+  }
+
+  console.log("All Done store");
+
+  return body;
+};
