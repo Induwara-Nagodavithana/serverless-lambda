@@ -110,7 +110,7 @@ functions:
           path: /users/verifyUser
           method: post
 # Store Functions
-   createStore:
+  createStore:
     handler: src/storeHandler.createStore
     timeout: 30
     memorySize: 128
