@@ -59,6 +59,8 @@ functions:
 #          conditions:
 #            host: example.com
 #            path: /hello
+
+# User Functions
   createUser:
     handler: src/userHandler.createUser
     timeout: 30
@@ -107,6 +109,48 @@ functions:
       - httpApi:
           path: /users/verifyUser
           method: post
+# Store Functions
+   createStore:
+    handler: src/storeHandler.createStore
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /stores
+          method: post
+  updateStore:
+    handler: src/storeHandler.updateStore
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /stores/{storeId}
+          method: put
+  deleteStore:
+    handler: src/storeHandler.deleteStore
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /stores/{storeId}
+          method: delete
+  findAllStore:
+    handler: src/storeHandler.findAllStore
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /stores
+          method: get
+  findStoreById:
+    handler: src/storeHandler.findStoreById
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /stores/{storeId}
+          method: get
+
 
 #    Define function environment variables here
 #    environment:
