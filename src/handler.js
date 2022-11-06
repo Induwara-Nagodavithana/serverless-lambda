@@ -94,3 +94,61 @@ module.exports.createUser = async (event) => {
 
   return body;
 };
+
+module.exports.updateUser = async (event) => {
+  console.log("Update user");
+  event.body = JSON.parse(event.body);
+  console.log(event);
+  console.log(event.body);
+  await connectDB();
+
+  let body = {
+    statusCode: 400,
+    body: JSON.stringify(
+      {
+        message: "User cannot created!",
+      },
+      null,
+      2
+    ),
+  };
+
+  if (event.body.password !== undefined) {
+    const hashedPassword = await bcrypt.hash(event.body.password, saltRounds);
+    event.body.password = hashedPassword;
+  }
+
+  // const user = new User(event.body);
+  // console.log(user);
+  // console.log("sadfasdf user");
+
+  await User.findOneAndUpdate({ _id: event.pathParameters.userId }, event.body)
+    .then((user) => {
+      body = {
+        statusCode: 200,
+        body: JSON.stringify(
+          {
+            message: user,
+          },
+          null,
+          2
+        ),
+      };
+    })
+    .catch((err) => {
+      body = {
+        statusCode: 400,
+        body: JSON.stringify(
+          {
+            message: "User cannot updated!",
+            error: err,
+          },
+          null,
+          2
+        ),
+      };
+    });
+  console.log("All Done user");
+
+  return body;
+};

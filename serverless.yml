@@ -67,6 +67,14 @@ functions:
       - httpApi:
           path: /users
           method: post
+  updateUser:
+    handler: src/handler.updateUser
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /users/{userId}
+          method: post
 
 #    Define function environment variables here
 #    environment:
