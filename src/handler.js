@@ -301,7 +301,7 @@ module.exports.verifyUser = async (event) => {
     statusCode: 400,
     body: JSON.stringify(
       {
-        message: "User cannot find!",
+        message: "Request has error!",
       },
       null,
       2
@@ -309,9 +309,12 @@ module.exports.verifyUser = async (event) => {
   };
 
   await User.findOne({
-    email: event.body.email,
+    "email": event.body.email,
   })
     .then(async (user) => {
+      console.log("user");
+      console.log(user);
+
       const result = await bcrypt.compare(password, event.body.password);
       if (result) {
         body = {
