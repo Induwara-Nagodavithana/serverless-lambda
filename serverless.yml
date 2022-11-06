@@ -60,7 +60,7 @@ functions:
 #            host: example.com
 #            path: /hello
   createUser:
-    handler: src/handler.createUser
+    handler: src/userHandler.createUser
     timeout: 30
     memorySize: 128
     events:
@@ -68,7 +68,7 @@ functions:
           path: /users
           method: post
   updateUser:
-    handler: src/handler.updateUser
+    handler: src/userHandler.updateUser
     timeout: 30
     memorySize: 128
     events:
@@ -76,7 +76,7 @@ functions:
           path: /users/{userId}
           method: put
   deleteUser:
-    handler: src/handler.deleteUser
+    handler: src/userHandler.deleteUser
     timeout: 30
     memorySize: 128
     events:
@@ -84,7 +84,7 @@ functions:
           path: /users/{userId}
           method: delete
   findAllUser:
-    handler: src/handler.findAllUser
+    handler: src/userHandler.findAllUser
     timeout: 30
     memorySize: 128
     events:
@@ -92,7 +92,7 @@ functions:
           path: /users
           method: get
   findUserById:
-    handler: src/handler.findUserById
+    handler: src/userHandler.findUserById
     timeout: 30
     memorySize: 128
     events:
@@ -100,7 +100,7 @@ functions:
           path: /users/{userId}
           method: get
   verifyUser:
-    handler: src/handler.verifyUser
+    handler: src/userHandler.verifyUser
     timeout: 30
     memorySize: 128
     events:
