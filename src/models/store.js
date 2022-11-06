@@ -15,7 +15,7 @@ const store = new mongoose.Schema({
     type: String,
   },
   owner: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },
 });
