@@ -118,7 +118,6 @@ module.exports.updateUser = async (event) => {
     event.body.password = hashedPassword;
   }
 
-
   await User.findOneAndUpdate({ _id: event.pathParameters.userId }, event.body)
     .then((user) => {
       body = {
@@ -149,8 +148,6 @@ module.exports.updateUser = async (event) => {
 
   return body;
 };
-
-
 
 module.exports.deleteUser = async (event) => {
   console.log("Delete user");
@@ -199,7 +196,6 @@ module.exports.deleteUser = async (event) => {
   return body;
 };
 
-
 module.exports.findAllUser = async (event) => {
   console.log("Find All user");
   console.log(event);
@@ -228,6 +224,118 @@ module.exports.findAllUser = async (event) => {
           2
         ),
       };
+    })
+    .catch((err) => {
+      body = {
+        statusCode: 400,
+        body: JSON.stringify(
+          {
+            message: "User cannot find!",
+            error: err,
+          },
+          null,
+          2
+        ),
+      };
+    });
+  console.log("All Done user");
+
+  return body;
+};
+
+module.exports.findUserById = async (event) => {
+  console.log("Find One user");
+  console.log(event);
+  await connectDB();
+
+  let body = {
+    statusCode: 400,
+    body: JSON.stringify(
+      {
+        message: "User cannot find!",
+      },
+      null,
+      2
+    ),
+  };
+
+  await User.findById(event.pathParameters.userId)
+    .then((user) => {
+      body = {
+        statusCode: 200,
+        body: JSON.stringify(
+          {
+            message: user,
+          },
+          null,
+          2
+        ),
+      };
+    })
+    .catch((err) => {
+      body = {
+        statusCode: 400,
+        body: JSON.stringify(
+          {
+            message: "User cannot find!",
+            error: err,
+          },
+          null,
+          2
+        ),
+      };
+    });
+  console.log("All Done user");
+
+  return body;
+};
+
+module.exports.verifyUser = async (event) => {
+  console.log("Verify user");
+  event.body = JSON.parse(event.body);
+  console.log(event);
+  console.log(event.body);
+  await connectDB();
+
+  let body = {
+    statusCode: 400,
+    body: JSON.stringify(
+      {
+        message: "User cannot find!",
+      },
+      null,
+      2
+    ),
+  };
+
+  await User.findOne({
+    email: event.body.email,
+  })
+    .then(async (user) => {
+      const result = await bcrypt.compare(password, event.body.password);
+      if (result) {
+        body = {
+          statusCode: 200,
+          body: JSON.stringify(
+            {
+              message: user,
+            },
+            null,
+            2
+          ),
+        };
+      } else {
+        body = {
+          statusCode: 400,
+          body: JSON.stringify(
+            {
+              message: "User Credentials Failed!",
+            },
+            null,
+            2
+          ),
+        };
+      }
     })
     .catch((err) => {
       body = {

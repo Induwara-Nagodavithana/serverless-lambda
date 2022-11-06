@@ -91,6 +91,22 @@ functions:
       - httpApi:
           path: /users
           method: get
+  findUserById:
+    handler: src/handler.findUserById
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /users/{userId}
+          method: get
+  verifyUser:
+    handler: src/handler.verifyUser
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /users/verifyUser
+          method: post
 
 #    Define function environment variables here
 #    environment:
