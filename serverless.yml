@@ -159,6 +159,56 @@ functions:
           path: /stores/{name}
           method: get
 
+# Deal Functions
+  createDeal:
+    handler: src/dealHandler.createDeal
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /deals
+          method: post
+  updateDeal:
+    handler: src/dealHandler.updateDeal
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /deals/{dealId}
+          method: put
+  deleteDeal:
+    handler: src/dealHandler.deleteDeal
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /deals/{dealId}
+          method: delete
+  findAllDeal:
+    handler: src/dealHandler.findAllDeal
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /deals
+          method: get
+  findDealById:
+    handler: src/dealHandler.findDealById
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /deals/{dealId}
+          method: get
+  findDealByStore:
+    handler: src/dealHandler.findDealByStore
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /deals/{storeId}
+          method: get
+
 
 #    Define function environment variables here
 #    environment:
