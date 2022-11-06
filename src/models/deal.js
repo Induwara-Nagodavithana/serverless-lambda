@@ -10,9 +10,6 @@ const deal = new mongoose.Schema({
   offerCount: {
     type: String,
   },
-  imageUrl: {
-    type: String,
-  },
   store: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "stores",
