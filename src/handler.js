@@ -198,3 +198,51 @@ module.exports.deleteUser = async (event) => {
 
   return body;
 };
+
+
+module.exports.findAllUser = async (event) => {
+  console.log("Find All user");
+  console.log(event);
+  await connectDB();
+
+  let body = {
+    statusCode: 400,
+    body: JSON.stringify(
+      {
+        message: "User cannot find!",
+      },
+      null,
+      2
+    ),
+  };
+
+  await User.find()
+    .then((user) => {
+      body = {
+        statusCode: 200,
+        body: JSON.stringify(
+          {
+            message: user,
+          },
+          null,
+          2
+        ),
+      };
+    })
+    .catch((err) => {
+      body = {
+        statusCode: 400,
+        body: JSON.stringify(
+          {
+            message: "User cannot find!",
+            error: err,
+          },
+          null,
+          2
+        ),
+      };
+    });
+  console.log("All Done user");
+
+  return body;
+};
