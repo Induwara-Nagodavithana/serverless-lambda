@@ -314,7 +314,12 @@ module.exports.verifyUser = async (event) => {
   console.log("user");
   console.log(user);
 
-  const result = user && await bcrypt.compare(user.password, event.body.password);
+  const result =
+    user && (await bcrypt.compare(event.body.password, user.password));
+
+  console.log("result");
+  console.log(result);
+
   if (result) {
     body = {
       statusCode: 200,
