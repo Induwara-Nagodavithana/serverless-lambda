@@ -156,7 +156,7 @@ functions:
     memorySize: 128
     events:
       - httpApi:
-          path: /stores/{name}
+          path: /stores/getStoreByName/{name}
           method: get
 
 # Deal Functions
