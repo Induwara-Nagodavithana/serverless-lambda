@@ -2,6 +2,7 @@
 const bcrypt = require("bcryptjs");
 const saltRounds = 5;
 var Store = require("./models/store");
+var User = require("./models/user");
 var connectDB = require("./config/db");
 
 module.exports.createStore = async (event) => {
@@ -223,6 +224,16 @@ module.exports.findStoreById = async (event) => {
       2
     ),
   };
+  const user123 = new User({
+    first_name: "Saman",
+    last_name: "Silva",
+    gender: "Male",
+    password: "1234",
+    type: "ShopOwner",
+    address: "dfdfg,dfgdf,gdfgdf,gdfg",
+    email: "Nimal11@gmail.com",
+    contactNo: "01234536789",
+  });
 
   const store = await Store.findById(event.pathParameters.storeId).populate(
     "owner"
