@@ -223,7 +223,7 @@ module.exports.findStoreById = async (event) => {
     ),
   };
 
-  await Store.findById(event.pathParameters.storeId)
+  await Store.findById(event.pathParameters.storeId).populate('owner')
     .then((store) => {
       body = {
         statusCode: 200,
