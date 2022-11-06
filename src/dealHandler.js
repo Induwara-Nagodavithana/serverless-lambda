@@ -292,7 +292,7 @@ module.exports.findDealByStore = async (event) => {
     });
 
     console.log("deal.populated('store')");
-    console.log(deal.populated("store"));
+    console.log(deal);
     body = {
       statusCode: 200,
       body: JSON.stringify(
@@ -309,7 +309,7 @@ module.exports.findDealByStore = async (event) => {
       body: JSON.stringify(
         {
           message: "Deal cannot find!",
-          error: err,
+          error: error,
         },
         null,
         2

@@ -318,7 +318,7 @@ module.exports.findStoreByName = async (event) => {
       body: JSON.stringify(
         {
           message: "Store cannot find!",
-          error: err,
+          error: error,
         },
         null,
         2
