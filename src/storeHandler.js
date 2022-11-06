@@ -234,11 +234,11 @@ module.exports.findStoreById = async (event) => {
     email: "Nimal11@gmail.com",
     contactNo: "01234536789",
   });
+  try {
+    const store = await Store.findById(event.pathParameters.storeId).populate(
+      "owner"
+    );
 
-  const store = await Store.findById(event.pathParameters.storeId);
-
-  if (store.name != undefined) {
-    store.populate("owner");
     console.log("store.populated('owner')");
     console.log(store.populated("owner"));
     body = {
@@ -246,6 +246,18 @@ module.exports.findStoreById = async (event) => {
       body: JSON.stringify(
         {
           message: store,
+        },
+        null,
+        2
+      ),
+    };
+  } catch (error) {
+    body = {
+      statusCode: 400,
+      body: JSON.stringify(
+        {
+          message: "Store cannot find!",
+          error: err,
         },
         null,
         2
