@@ -351,6 +351,7 @@ module.exports.verifyUser = async (event) => {
 
 module.exports.uploadUserImage = async (event) => {
   console.log("Upload Image");
+  console.log(event);
   event.body = JSON.parse(event.body);
   console.log(event);
   console.log(event.body);
