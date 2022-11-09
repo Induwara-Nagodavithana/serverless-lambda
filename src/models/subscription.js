@@ -9,9 +9,8 @@ const subscription = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "stores",
   },
-  deal: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "deals",
+  topic: {
+    type: String,
   },
 });
 
