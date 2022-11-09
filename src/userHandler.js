@@ -352,10 +352,10 @@ module.exports.verifyUser = async (event) => {
 module.exports.uploadUserImage = async (event) => {
   console.log("Upload Image");
   console.log(event);
-  event.body = JSON.parse(event.body);
-  console.log(event);
+  // event.body = JSON.parse(event.body);
+  // console.log(event);
   console.log(event.body);
-  await connectDB();
+  // await connectDB();
 
   const fileToUpload = {
     userId:"123456",
@@ -367,7 +367,7 @@ module.exports.uploadUserImage = async (event) => {
     const params = {
         Bucket: 'promo-deal-bucket',
         Key: `upload-to-s3`,
-        Body: JSON.stringify(fileToUpload),
+        Body: event.body,
         ContentType: 'application/json; charset=utf-8'
     }
     await S3.putObject(params).promise();
