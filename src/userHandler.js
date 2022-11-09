@@ -2,6 +2,7 @@
 const bcrypt = require("bcryptjs");
 const saltRounds = 5;
 var User = require("./models/user");
+const AWS = require('aws-sdk');
 var connectDB = require("./config/db");
 module.exports.hello = async (event) => {
   return {
@@ -351,6 +352,7 @@ module.exports.verifyUser = async (event) => {
 
 module.exports.uploadUserImage = async (event) => {
   console.log("Upload Image");
+  const S3 = new AWS.S3();
   console.log(event);
   // event.body = JSON.parse(event.body);
   // console.log(event);
