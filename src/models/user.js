@@ -25,6 +25,9 @@ const user = new mongoose.Schema({
       type: String,
       unique:true
     },
+    imageUrl: {
+      type: String,
+    },
     contactNo: {
       type: String,
     }
