@@ -109,6 +109,14 @@ functions:
       - httpApi:
           path: /users/verifyUser
           method: post
+   uploadUserImage:
+    handler: src/userHandler.uploadUserImage
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /users/uploadUserImage
+          method: post
 # Store Functions
   createStore:
     handler: src/storeHandler.createStore

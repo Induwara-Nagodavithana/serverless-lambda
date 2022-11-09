@@ -348,3 +348,31 @@ module.exports.verifyUser = async (event) => {
 
   return body;
 };
+
+module.exports.uploadUserImage = async (event) => {
+  console.log("Upload Image");
+  event.body = JSON.parse(event.body);
+  console.log(event);
+  console.log(event.body);
+  await connectDB();
+
+  const fileToUpload = {
+    userId:"123456",
+    email:"enrico@gmail.com",
+    city:"London",
+    country:"UK"
+  }
+  try {
+    const params = {
+        Bucket: 'promo-deal-bucket',
+        Key: `upload-to-s3`,
+        Body: JSON.stringify(fileToUpload),
+        ContentType: 'application/json; charset=utf-8'
+    }
+    await S3.putObject(params).promise();
+    console.log("Upload Completed");
+  } catch(e){
+    console.log(e)
+    console.log("Upload Error", e);
+  }
+};
