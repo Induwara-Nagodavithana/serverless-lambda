@@ -109,7 +109,7 @@ functions:
       - httpApi:
           path: /users/verifyUser
           method: post
-   uploadUserImage:
+  uploadUserImage:
     handler: src/userHandler.uploadUserImage
     timeout: 30
     memorySize: 128
