@@ -180,6 +180,14 @@ functions:
       - httpApi:
           path: /stores/getStoreByName/{name}
           method: get
+  findStoreByOwnerId:
+    handler: src/storeHandler.findStoreByOwnerId
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /stores/getStoreByOwnerId/{ownerId}
+          method: get
 
 # Deal Functions
   createDeal:
