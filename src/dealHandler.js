@@ -176,6 +176,7 @@ module.exports.findAllDeal = async (event) => {
   };
 
   await Deal.find()
+    .populate("store")
     .then((deal) => {
       body = {
         statusCode: 200,
