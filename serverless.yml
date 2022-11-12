@@ -156,6 +156,14 @@ functions:
       - httpApi:
           path: /stores
           method: get
+  findAllStoreByGroup:
+    handler: src/storeHandler.findAllStoreByGroup
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /stores
+          method: get
   findStoreById:
     handler: src/storeHandler.findStoreById
     timeout: 30

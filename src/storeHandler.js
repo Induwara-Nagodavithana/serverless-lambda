@@ -209,6 +209,56 @@ module.exports.findAllStore = async (event) => {
   return body;
 };
 
+module.exports.findAllStoreByGroup = async (event) => {
+  console.log("Find All store");
+  console.log(event);
+  await connectDB();
+
+  let body = {
+    statusCode: 400,
+    body: JSON.stringify(
+      {
+        message: "Store cannot find!",
+      },
+      null,
+      2
+    ),
+  };
+
+  await Store.aggregate()
+    .facet({
+      stores: [{ groupBy: "$catergory" }],
+    })
+    .then((store) => {
+      body = {
+        statusCode: 200,
+        body: JSON.stringify(
+          {
+            message: store,
+          },
+          null,
+          2
+        ),
+      };
+    })
+    .catch((err) => {
+      body = {
+        statusCode: 400,
+        body: JSON.stringify(
+          {
+            message: "Store cannot find!",
+            error: err,
+          },
+          null,
+          2
+        ),
+      };
+    });
+  console.log("All Done store");
+
+  return body;
+};
+
 module.exports.findStoreById = async (event) => {
   console.log("Find One store");
   console.log(event);
