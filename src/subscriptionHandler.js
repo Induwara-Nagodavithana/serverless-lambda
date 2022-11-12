@@ -314,8 +314,7 @@ module.exports.findSubscriptionByUser = async (event) => {
       user: event.pathParameters.userId,
     })
       .populate("user")
-      .populate("store")
-      .populate("deal");
+      .populate("store");
 
     console.log("subscription.populated('store')");
     console.log(subscription);
