@@ -225,10 +225,7 @@ module.exports.findAllStoreByGroup = async (event) => {
     ),
   };
 
-  await Store.aggregate()
-    .facet({
-      stores: [{ groupBy: "$catergory" }],
-    })
+  await Store.aggregate().group({ catergory: "$catergory" })
     .then((store) => {
       body = {
         statusCode: 200,
