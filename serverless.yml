@@ -162,7 +162,7 @@ functions:
     memorySize: 128
     events:
       - httpApi:
-          path: /stores
+          path: /stores/findAllStoreByGroup
           method: get
   findStoreById:
     handler: src/storeHandler.findStoreById
