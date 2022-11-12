@@ -346,3 +346,83 @@ module.exports.findSubscriptionByUser = async (event) => {
 
   return body;
 };
+
+
+module.exports.findSubscriptionByUserAndStore = async (event) => {
+  console.log("Find One subscription");
+  event.body = JSON.parse(event.body);
+  console.log(event);
+  console.log(event.body);
+  await connectDB();
+
+  let body = {
+    statusCode: 400,
+    body: JSON.stringify(
+      {
+        message: "Error in Request!",
+      },
+      null,
+      2
+    ),
+  };
+  const user123 = new User({
+    first_name: "Saman",
+    last_name: "Silva",
+    gender: "Male",
+    password: "1234",
+    type: "ShopOwner",
+    address: "dfdfg,dfgdf,gdfgdf,gdfg",
+    email: "Nimal11@gmail.com",
+    contactNo: "01234536789",
+  });
+  const store123 = new Store({
+    name: "Arpico",
+    address: "dfdfg,dfgdf,gdfgdf,gdfg",
+    openHours: "10.00 AM to 10.00 PM",
+    contactNo: "01234536789",
+    owner: "6366c3995a0d65446f814b3a",
+  });
+  const deal123 = new Deal({
+    description: "50% off",
+    price: "2500",
+    offerCount: "250",
+    imageUrl: "01234536789",
+    store: "63677ab40465003fe6a9b852",
+  });
+
+  try {
+    const subscription = await Subscription.find({
+      user: event.body.userId,
+      store: event.body.storeId,
+    });
+
+    console.log("subscription.populated('store')");
+    console.log(subscription);
+    body = {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          message: subscription,
+        },
+        null,
+        2
+      ),
+    };
+  } catch (error) {
+    body = {
+      statusCode: 400,
+      body: JSON.stringify(
+        {
+          message: "Subscription cannot find!",
+          error: error,
+        },
+        null,
+        2
+      ),
+    };
+  }
+
+  console.log("All Done subscription");
+
+  return body;
+};

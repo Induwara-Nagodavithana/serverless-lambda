@@ -280,7 +280,14 @@ functions:
       - httpApi:
           path: /subscriptions/getSubscriptionsByUser/{userId}
           method: get
-
+  findSubscriptionByUserAndStore:
+    handler: src/subscriptionHandler.findSubscriptionByUserAndStore
+    timeout: 30
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /subscriptions/getSubscriptionsByUserAndStore
+          method: post
 
 #    Define function environment variables here
 #    environment:
