@@ -375,11 +375,13 @@ module.exports.uploadUserImage = async (event) => {
       base64File.replace(/^data:image\/\w+;base64,/, ""),
       "base64"
     );
+    console.log("decodedFile");
+    console.log(decodedFile);
     const params = {
       Bucket: "promo-deal-bucket",
       Key: `upload-to-s3/${Date.now().toString()}.jpeg`,
       Body: decodedFile,
-      ContentType: "application/json; charset=utf-8",
+      ContentType: "image/jpeg",
     };
     const uploadResult = await S3.putObject(params).promise();
     console.log("Upload Completed");
