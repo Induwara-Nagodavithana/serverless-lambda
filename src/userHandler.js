@@ -366,19 +366,26 @@ module.exports.uploadUserImage = async (event) => {
     country: "UK",
   };
   try {
+    const parsedBody = JSON.parse(event.body);
+    const base64File = parsedBody.file;
+    const decodedFile = Buffer.from(
+      base64File.replace(/^data:image\/\w+;base64,/, ""),
+      "base64"
+    );
     const params = {
       Bucket: "promo-deal-bucket",
-      Key: `upload-to-s3/${Date.now().toString()}`,
-      Body: event.body,
+      Key: `upload-to-s3/${Date.now().toString()}.jpeg`,
+      Body: decodedFile,
       ContentType: "application/json; charset=utf-8",
     };
-    await S3.putObject(params).promise();
+    const uploadResult = await S3.putObject(params).promise();
     console.log("Upload Completed");
     return {
       statusCode: 200,
       body: JSON.stringify(
         {
           message: `upload-to-s3/${Date.now().toString()}`,
+          uploadResult,
         },
         null,
         2
