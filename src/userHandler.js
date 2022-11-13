@@ -368,8 +368,8 @@ module.exports.uploadUserImage = async (event) => {
   try {
     const params = {
         Bucket: 'promo-deal-bucket',
-        Key: `upload-to-s3`,
-        Body: event.body,
+        Key: `upload-to-s3/${fileToUpload.userId}`,
+        Body: JSON.parse(fileToUpload),
         ContentType: 'application/json; charset=utf-8'
     }
     await S3.putObject(params).promise();
