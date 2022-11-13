@@ -2,7 +2,7 @@
 const bcrypt = require("bcryptjs");
 const saltRounds = 5;
 var User = require("./models/user");
-const AWS = require('aws-sdk');
+const AWS = require("aws-sdk");
 var connectDB = require("./config/db");
 module.exports.hello = async (event) => {
   return {
@@ -360,22 +360,43 @@ module.exports.uploadUserImage = async (event) => {
   // await connectDB();
 
   const fileToUpload = {
-    userId:"123456",
-    email:"enrico@gmail.com",
-    city:"London",
-    country:"UK"
-  }
+    userId: "123456",
+    email: "enrico@gmail.com",
+    city: "London",
+    country: "UK",
+  };
   try {
     const params = {
-        Bucket: 'promo-deal-bucket',
-        Key: `upload-to-s3/${fileToUpload.userId}`,
-        Body: 'dfigjdoifjgodifjgidfjgoidjfgdfgdf8g7d9f8g7d9f8g7dfg8dfgdf',
-        ContentType: 'application/json; charset=utf-8'
-    }
+      Bucket: "promo-deal-bucket",
+      Key: `upload-to-s3/${Date.now().toString()}`,
+      Body: event.body,
+      ContentType: "application/json; charset=utf-8",
+    };
     await S3.putObject(params).promise();
     console.log("Upload Completed");
-  } catch(e){
-    console.log(e)
+    return {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          message: `upload-to-s3/${Date.now().toString()}`,
+        },
+        null,
+        2
+      ),
+    };
+  } catch (e) {
+    console.log(e);
     console.log("Upload Error", e);
+    return {
+      statusCode: 400,
+      body: JSON.stringify(
+        {
+          message: "Upload Error",
+          error: e,
+        },
+        null,
+        2
+      ),
+    };
   }
 };
