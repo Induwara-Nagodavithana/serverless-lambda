@@ -366,7 +366,7 @@ module.exports.uploadUserImage = async (event) => {
     country: "UK",
   };
   try {
-    const parsedBody = JSON.parse(event.body);
+    const parsedBody = JSON.parse(JSON.stringify(event.body));
     const base64File = parsedBody.file;
     const decodedFile = Buffer.from(
       base64File.replace(/^data:image\/\w+;base64,/, ""),
