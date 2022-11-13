@@ -290,7 +290,7 @@ module.exports.findDealByStore = async (event) => {
   try {
     const deal = await Deal.find({
       store: event.pathParameters.storeId,
-    });
+    }).populate("store");
 
     console.log("deal.populated('store')");
     console.log(deal);
