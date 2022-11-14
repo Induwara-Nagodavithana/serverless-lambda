@@ -308,13 +308,13 @@ functions:
 #      Type: AWS::S3::Bucket
 #      Properties:
 #        BucketName: my-new-bucket
-resources:
-  Resources:
-    FileBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: promo-deal-bucket
-        AccessControl: PublicRead
+# resources:
+#   Resources:
+#     FileBucket:
+#       Type: AWS::S3::Bucket
+#       Properties:
+#         BucketName: promo-deal-bucket
+#         AccessControl: PublicRead
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"
