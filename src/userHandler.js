@@ -366,10 +366,12 @@ module.exports.uploadUserImage = async (event) => {
     country: "UK",
   };
   try {
-    const parsedBody = JSON.parse(JSON.stringify(event.body));
+    const parsedBody = JSON.parse(event.body);
     const base64File = parsedBody.file;
     console.log("parsedBody");
     console.log(parsedBody);
+    console.log(parsedBody.file);
+    console.log(parsedBody.type);
 
     const decodedFile = Buffer.from(
       base64File.replace(/^data:image\/\w+;base64,/, ""),
@@ -380,7 +382,7 @@ module.exports.uploadUserImage = async (event) => {
     const params = {
       Bucket: "promo-deal-bucket",
       Key: `upload-to-s3/${Date.now().toString()}.${parsedBody.type}`,
-      ACL: 'public-read',
+      ACL: "public-read",
       Body: decodedFile,
       ContentType: `image/${parsedBody.type}`,
     };
