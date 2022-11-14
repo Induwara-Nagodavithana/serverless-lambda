@@ -377,11 +377,12 @@ module.exports.uploadUserImage = async (event) => {
       base64File.replace(/^data:image\/\w+;base64,/, ""),
       "base64"
     );
+    const fileName = Date.now().toString();
     console.log("decodedFile");
     console.log(decodedFile);
     const params = {
       Bucket: "promo-deal-bucket",
-      Key: `upload-to-s3/${Date.now().toString()}.${parsedBody.type}`,
+      Key: `upload-to-s3/${fileName}.${parsedBody.type}`,
       ACL: "public-read",
       Body: decodedFile,
       ContentType: `image/${parsedBody.type}`,
@@ -392,7 +393,7 @@ module.exports.uploadUserImage = async (event) => {
       statusCode: 200,
       body: JSON.stringify(
         {
-          message: `upload-to-s3/${Date.now().toString()}`,
+          message: `upload-to-s3/${fileName}.${parsedBody.type}`,
           uploadResult,
         },
         null,
