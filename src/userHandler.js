@@ -367,7 +367,7 @@ module.exports.uploadUserImage = async (event) => {
   };
   try {
     const parsedBody = JSON.parse(JSON.stringify(event.body));
-    const base64File = parsedBody;
+    const base64File = parsedBody.file;
     console.log("parsedBody");
     console.log(parsedBody);
 
@@ -379,9 +379,10 @@ module.exports.uploadUserImage = async (event) => {
     console.log(decodedFile);
     const params = {
       Bucket: "promo-deal-bucket",
-      Key: `upload-to-s3/${Date.now().toString()}.jpeg`,
+      Key: `upload-to-s3/${Date.now().toString()}.${parsedBody.type}`,
+      ACL: 'public-read',
       Body: decodedFile,
-      ContentType: "image/jpeg",
+      ContentType: `image/${parsedBody.type}`,
     };
     const uploadResult = await S3.putObject(params).promise();
     console.log("Upload Completed");
